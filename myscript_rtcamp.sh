@@ -84,27 +84,23 @@ mysql()
 	echo "Creating mysql database...."	
 	echo -n "Please enter the mysql username :- "
 	read username
-	echo -n "Please enter the mysql password :- "
-	stty -echo
-	read password
-	stty echo
-	echo
-	temp= echo $domain_name | sed 's/\./\_/g'
-	mysqladmin -u $username -p CREATE  example_com_db
+	echo "Enter the name of the database:-"
+	read db_name
+	mysqladmin -u $username -p CREATE  $db_name
 	if [ ! $? = 0 ]; then
 		echo
 		echo "Username/Password Incorrect.. Please try again"
 		echo
 		mysql
 	else
-	echo "$database_name created successfully..."
+	echo "$db_name created successfully..."
 	fi
 }
 
 wpconfig()
 {
 	sudo cp /var/www/$domain_name/wordpress/wp-config-sample.php /var/www/$domain_name/wordpress/wp-config.php
-	sudo sed -i 's/database_name_here/example_com_db/g' /var/www/$domain_name/wordpress/wp-config.php
+	sudo sed -i 's/database_name_here/'$db_name'/g' /var/www/$domain_name/wordpress/wp-config.php
 	sudo sed -i 's/username_here/'$username'/g' /var/www/$domain_name/wordpress/wp-config.php
 	sudo sed -i 's/password_here/'$password'/g' /var/www/$domain_name/wordpress/wp-config.php
 	echo "wp-config.php file created with proper DB configuration."	
