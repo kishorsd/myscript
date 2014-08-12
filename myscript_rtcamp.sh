@@ -73,7 +73,6 @@ wordpress()
 	echo "Downloading latest version of Wordpress."
 	cd /var/www/$domain_name/
 	sudo wget http://wordpress.org/latest.tar.gz
-	#sudo tar --strip-components=1 -xvf latest.tar.gz
 	sudo tar -zxvf latest.tar.gz
 	sudo rm latest.tar.gz
 
