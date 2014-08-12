@@ -8,8 +8,7 @@
 
 check_host_pkgs () 
 {
-	#unset deb_pkgs
-	#echo $deb_pkgs
+	
 	pkg="mysql-server"
 	check_dpkg
 	pkg="php5"
