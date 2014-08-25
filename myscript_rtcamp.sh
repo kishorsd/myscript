@@ -36,7 +36,7 @@ enter_domain_name()
 {
 	echo -n "Please Enter Domain Name :- "
 	read domain_name
-	sudo sed -i "3i127.0.0.1  $domain_name" /etc/hosts	
+	sudo sed -i "1i127.0.0.1  $domain_name" /etc/hosts	
 	echo "$domain_name entry created in /etc/hosts..."
 }
 
@@ -82,7 +82,7 @@ mysql()
 	echo "Creating mysql database...."	
 	echo -n "Please enter the mysql username :- "
 	read username
-	echo "Enter the name of the database:-"
+	echo "Enter the name of the database :-"
 	read db_name
 	mysqladmin -u $username -p CREATE  $db_name
 	if [ ! $? = 0 ]; then
@@ -114,5 +114,5 @@ wpconfig
 sudo /etc/init.d/nginx restart 1> /dev/null
 sudo /etc/init.d/php5-fpm restart 1> /dev/null
 
-echo "script executed succesfully......"
+echo "Script execution completed succesfully......"
 
