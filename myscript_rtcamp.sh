@@ -22,9 +22,16 @@ check_host_pkgs ()
 	if [ "${deb_pkgs}" ] ; then
 		ping -c1 www.google.com | grep ttl >/dev/null 2>&1 || network_down
 		echo "Installing: ${deb_pkgs}"
+		sudo apt-get update
 		sudo apt-get -y install ${deb_pkgs}
 		sudo apt-get autoclean
 	fi
+}
+
+network_down()
+{
+	echo "Network down. Please check your internet connection... "
+	exit
 }
 
 check_dpkg () 
@@ -115,4 +122,5 @@ sudo /etc/init.d/nginx restart 1> /dev/null
 sudo /etc/init.d/php5-fpm restart 1> /dev/null
 
 echo "Script execution completed succesfully......"
+echo "Please enter the $domain_name into your browser."
 
