@@ -21,8 +21,8 @@ check_host_pkgs ()
 
 	if [ "${deb_pkgs}" ] ; then
 		ping -c1 www.google.com | grep ttl >/dev/null 2>&1 || network_down
-		echo "Installing: ${deb_pkgs}"
 		sudo apt-get update
+		echo "Installing: ${deb_pkgs}"
 		sudo apt-get -y install ${deb_pkgs}
 		sudo apt-get autoclean
 	fi
