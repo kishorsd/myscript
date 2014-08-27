@@ -20,7 +20,7 @@ check_host_pkgs ()
 
 
 	if [ "${deb_pkgs}" ] ; then
-		ping -c1 www.google.com | grep ttl >/dev/null 2>&1 || network_down
+		ping -c3 www.google.com | grep ttl >/dev/null 2>&1 || network_down
 		sudo apt-get update
 		echo "Installing: ${deb_pkgs}"
 		sudo apt-get -y install ${deb_pkgs}
