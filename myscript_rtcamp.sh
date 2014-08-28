@@ -49,7 +49,7 @@ enter_domain_name()
 
 nginx_conf()
 {
-	sudo chown $HOSTNAME:$HOSTNAME /etc/nginx/sites-available /etc/nginx/sites-enabled
+	
 	sudo echo "  server {
     					listen    80;
     					server_name    $domain_name;
@@ -69,7 +69,6 @@ nginx_conf()
     						}
 				} " > /etc/nginx/sites-available/${domain_name}.conf
 	sudo ln -s /etc/nginx/sites-available/${domain_name}.conf /etc/nginx/sites-enabled/${domain_name}.conf
-	sudo chown root /etc/nginx/sites-available /etc/nginx/sites-enabled
 	sudo mkdir /var/www /var/www/$domain_name; 2> /dev/null
 	echo "$domain_name nginx conf file created and linked"
 }
