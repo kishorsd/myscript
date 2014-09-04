@@ -43,8 +43,17 @@ enter_domain_name()
 {
 	echo -n "Please Enter Domain Name :- "
 	read domain_name
-	sudo sed -i "1i127.0.0.1  $domain_name" /etc/hosts	
-	echo "$domain_name entry created in /etc/hosts..."
+	grep -i "$domain_name" /etc/hosts > /dev/null
+	if [ $? -eq 0 ]; then
+		{
+			echo "Domain name already exists... Please enter another domain name..."
+		}
+	else
+		{
+			sudo sed -i "1i127.0.0.1  $domain_name" /etc/hosts
+			echo "$domain_name entry created in /etc/hosts"
+		}
+	fi
 }
 
 nginx_conf()
