@@ -6,26 +6,33 @@
 
 #!/bin/sh -e
 
+
+
+
 check_host_pkgs () 
 {
-	
-	pkg="mysql-server"
-	check_dpkg
-	pkg="php5"
-	check_dpkg
-	pkg="php5-mysql"
-	check_dpkg
-	pkg="nginx"
-	check_dpkg
+	if [$(id -u) -eq 0];then
+		pkg="mysql-server"
+		check_dpkg
+		pkg="php5-fpm"
+		check_dpkg
+		pkg="php5-mysql"
+		check_dpkg
+		pkg="nginx"
+		check_dpkg
 
 
-	if [ "${deb_pkgs}" ] ; then
-		ping -c3 www.google.com | grep ttl >/dev/null 2>&1 || network_down
-		sudo apt-get update
-		echo "Installing: ${deb_pkgs}"
-		sudo apt-get -y install ${deb_pkgs}
-		sudo apt-get autoclean
-	fi
+		if [ "${deb_pkgs}" ] ; then
+			ping -c3 www.google.com | grep ttl >/dev/null 2>&1 || network_down
+			sudo apt-get update
+			echo "Installing: ${deb_pkgs}"
+			sudo apt-get -y install ${deb_pkgs}
+			sudo apt-get autoclean
+		fi
+	else
+		echo "You need to be root..."
+		exit
+	fi	
 }
 
 network_down()
@@ -118,6 +125,7 @@ wpconfig()
 	sudo sed -i 's/password_here/'$password'/g' /var/www/$domain_name/wordpress/wp-config.php
 	echo "wp-config.php file created with proper DB configuration."	
 }
+
 
 check_host_pkgs
 enter_domain_name
