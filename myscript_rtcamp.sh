@@ -26,7 +26,7 @@ check_host_pkgs ()
 			ping -c3 www.google.com | grep ttl >/dev/null 2>&1 || network_down
 			sudo apt-get update
 			echo "Installing: ${deb_pkgs}"
-			sudo apt-get -y install ${deb_pkgs}
+			sudo apt-get -y install ${deb_pkgs}  --no-install-recommends
 			sudo apt-get autoclean
 		fi
 	else
@@ -43,7 +43,7 @@ network_down()
 
 check_dpkg () 
 {
-	LC_ALL=C dpkg --list | awk '{print $2}' | grep "^${pkg}$" >/dev/null || deb_pkgs="${deb_pkgs}${pkg} "
+	LC_ALL=C dpkg --list | awk '{print $2}' | grep "^${pkg}$" > /dev/null || deb_pkgs="${deb_pkgs}${pkg} "
 }
 
 enter_domain_name()
